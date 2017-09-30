@@ -96,6 +96,8 @@ $(() => {
             const workRecordButtonsDiv = document.createElement('div');
             const nextButton = document.createElement('input');
             const prevButton = document.createElement('input');
+            const searchBox = document.createElement('input');
+            const searchButton = document.createElement('input');
 
             const displayWorkRecord = (workRecElmnt, workRecNum, workRecs) => {
                 const workRecord = workRecs[workRecNum];
@@ -139,6 +141,35 @@ $(() => {
                 displayWorkRecord(workRecordDiv, ++index, workRecArray);
                 checkButtonsForDisabling($('#btnNext'), $('#btnPrev'),
                     workRecArray.length);
+            });
+
+            searchBox.id = 'searchBox';
+            searchBox.type = 'text';
+            searchButton.id = 'btnSearch';
+            searchButton.type = 'button';
+            searchButton.value = 'Search';
+            $('#searchBarLocation').append(searchBox);
+            $('#searchBarLocation').append(searchButton);
+
+            const displayErrorMessage = message => {
+                workRecordDiv.text(message);
+            };
+
+            searchButton.addEventListener('click', () => {
+                const userInput = $('#searchBox').val();
+                if(!$.isNumeric(userInput)) {
+                    displayErrorMessage('Search term must be a number.');
+                } else {
+                    if(parseInt(userInput) >= workRecArray.length) {
+                        displayErrorMessage('Work Record does not exist.');
+                    } else {
+                        index = userInput;
+                        displayWorkRecord(workRecordDiv, index,
+                            workRecArray);
+                        checkButtonsForDisabling($('#btnNext'), $('#btnPrev'),
+                            workRecArray.length);
+                    }
+                }
             });
 
             clientInvoiceElement.append(workRecordDiv);
