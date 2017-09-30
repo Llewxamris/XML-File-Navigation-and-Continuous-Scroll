@@ -11,7 +11,6 @@ $(() => {
             const optionTag = document.createElement('option');
             optionTag.value = client.querySelector('id').innerHTML;
             optionTag.text = $(client).find('clientName').text();
-
             optionTags.push(optionTag);
         });
 
@@ -42,8 +41,35 @@ $(() => {
                 ? './invoice.xml'
                 : `./invoice${selectedValue}.xml`;
 
-        $.get(invoiceFile, xmlData => {
-            console.log(xmlData);
+        $.get(invoiceFile, invoiceData => {
+            const clientInvoiceElement = $('#clientInvoiceData');
+            // XXX const clientInformation = $(invoiceData).find('client');
+            // TODO: Parse through contact information without hardcoding the
+            // tag names, prevents errors if the invoice.xsd file changes.
+            // TODO: Currently just dumps text to screen, must format data.
+
+            clientInvoiceElement.text('');
+            clientInvoiceElement.append($(invoiceData).find('contactFirstName')
+                .text() + ' ');
+            clientInvoiceElement.append($(invoiceData).find('contactLastName')
+                .text());
+            clientInvoiceElement.append($(invoiceData).find('clientStreet')
+                .text());
+            clientInvoiceElement.append($(invoiceData).find('clientCity')
+                .text() + ', ');
+            clientInvoiceElement.append($(invoiceData).find('clientProvince')
+                .text());
+            clientInvoiceElement.append($(invoiceData).find('clientPostalCode')
+                .text());
+            clientInvoiceElement.append($(invoiceData).find('clientDiscount')
+                .text());
+            clientInvoiceElement.append($(invoiceData).find('info')
+                .attr('invoiceNumber'));
+            clientInvoiceElement.append($(invoiceData).find('invoiceDate')
+                .text());
+            clientInvoiceElement.append($(invoiceData).find('billRate')
+                .text());
+
         });
     });
 });
