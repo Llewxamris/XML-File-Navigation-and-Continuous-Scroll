@@ -130,12 +130,15 @@ $(() => {
                     return $(workRecord).find(element).text();
                 };
 
-                $('#workNumber').text($(workRecord).attr('workNumber'));
+                $('#workNumber').text(`Work #: ${$(workRecord).attr('workNumber')}`);
                 $('#workDescription')
-                    .text(getWorkRecordValue('workDescription'));
+                    .text(`Desc: ${getWorkRecordValue('workDescription')}`);
                 $('#workDate').text(getWorkRecordValue('workDate'));
-                $('#workTypeNumber').text(getWorkRecordValue('workTypeNumber'));
-                $('#billedHours').text(getWorkRecordValue('billedHours'));
+                $('#workTypeNumber')
+                    .text(`Work Type:
+                    ${getWorkRecordValue('workTypeNumber')}`);
+                $('#billedHours')
+                    .text(`Hours: ${getWorkRecordValue('billedHours')}`);
             };// displayWorkRecord(...)
 
             const checkButtonsForDisabling = (nextBtn, prevBtn, arraySize) => {

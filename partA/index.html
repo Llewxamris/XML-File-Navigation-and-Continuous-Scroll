@@ -7,41 +7,49 @@
         <link rel="stylesheet" href="./css/style.css" type="text/css" />
         <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <div id="mainContent">
-            <select id="clientSelection"></select>
-            <div id="clientInvoiceData">
-                <div id="contactName"></div>
-                <div id="clientStreet"></div>
-                <div id="clientCity"></div>
-                <div id="clientPostalCode"></div>
-                <div id="clientDiscount"></div>
+integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="mainContent">
+        <select id="clientSelection"></select>
+        <div id="informationContainer">
+            <div id="clientInformation">
+                <div id="clientInvoiceData">
+                    <div id="contactName"></div>
+                    <div id="clientStreet"></div>
+                    <div id="clientCity"></div>
+                    <div id="clientPostalCode"></div>
+                    <div id="clientDiscount"></div>
+                </div>
+                <br />
+                <div id="invoiceInvoiceData">
+                    <div id="invoiceNumber"></div>
+                    <div id="invoiceDate"></div>
+                    <div id="billRate"></div>
+                </div>
             </div>
-            <div id="invoiceInvoiceData">
-                <div id="invoiceNumber"></div>
-                <div id="invoiceDate"></div>
-                <div id="billRate"></div>
+            <div id="workRecordInformation">
+                <div id="workRecordData">
+                    <div id="workNumber"></div>
+                    <div id="workDescription"></div>
+                    <div id="workDate"></div>
+                    <div id="workTypeNumber"></div>
+                    <div id="billedHours"></div>
+                </div>
+                <br />
+                <div id="seekButtons">
+                    <span id="previousBtnLocation"></span>&nbsp;
+                    <span id="nextBtnLocation"></span>
+                </div>
+                <div id="searchBarLocation">
+                    <span id="txtSearchLocation"></span>&nbsp;
+                    <span id="btnSearchLocation"></span>
+                </div>
+                <div id="errorMessages"></div>
             </div>
-            <div id="workRecordData">
-                <div id="workNumber"></div>
-                <div id="workDescription"></div>
-                <div id="workDate"></div>
-                <div id="workTypeNumber"></div>
-                <div id="billedHours"></div>
-            </div>
-            <div id="seekButtons">
-                <span id="previousBtnLocation"></span>&nbsp;
-                <span id="nextBtnLocation"></span>
-            </div>
-            <div id="searchBarLocation">
-                <span id="txtSearchLocation"></span>&nbsp;
-                <span id="btnSearchLocation"></span>
-            </div>
-            <div id="errorMessages"></div>
         </div>
-    </body>
-    <script src="./js/scripts.js" charset="utf-8"></script>
+    </div>
+</body>
+<script src="./js/scripts.js" charset="utf-8"></script>
 </html>
