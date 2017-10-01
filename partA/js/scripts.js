@@ -139,6 +139,7 @@ $(() => {
                     ${getWorkRecordValue('workTypeNumber')}`);
                 $('#billedHours')
                     .text(`Hours: ${getWorkRecordValue('billedHours')}`);
+                $('#errorMessages').text('');
             };// displayWorkRecord(...)
 
             const checkButtonsForDisabling = (nextBtn, prevBtn, arraySize) => {
@@ -176,24 +177,29 @@ $(() => {
             $('#btnSearch').click(() => {
                 /* Checks users input to the seach box, and jumps to that work
                     record if it exists. */
-                const userInput = $('#txtSearch').val();
+                const userInput = parseInt($('#txtSearch').val());
+                let workItemIndex = -1;
 
-                if(!$.isNumeric(userInput)) {
-                    // Fails because input contains non-numbers.
-                    displayErrorMessage('Search term must be a number.');
-                } else {
-                    if(parseInt(userInput) >= workRecArray.length) {
-                        // Fails because search is greater than array.
-                        // TODO: Just realized this is *NOT* what the search bar
-                        // was suppose to do. It should jump to the matching
-                        // work number, not the matching index number.
-                        displayErrorMessage('Work Record does not exist.');
-                    } else {
-                        index = userInput;
-                        displayWorkRecord(index, workRecArray);
+                if($.isNumeric(userInput)) {
+                    for (let i = 0; i < workRecArray.length; i++) {
+                        if (parseInt($(workRecArray[i]).attr('workNumber')) ===
+                            userInput) {
+                            workItemIndex = i;
+                        }
+                    }
+                    if (workItemIndex !== -1) {
+                        index = workItemIndex;
+                        displayWorkRecord(workItemIndex, workRecArray);
                         checkButtonsForDisabling($('#btnNext'), $('#btnPrev'),
                             workRecArray.length);
+                    } else {
+                        // Fails because item does not exist.
+                        displayErrorMessage(`Work Record ${userInput} does not
+                            exist`);
                     }
+                } else {
+                    // Fails because input is not numeric
+                    displayErrorMessage('Please enter a number.');
                 }
             });// $('#btnSearch').click(...)
             // Display the first work record on client selection.

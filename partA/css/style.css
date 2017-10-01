@@ -10,3 +10,7 @@ body {
 #workRecordData {
     padding-left: 10%;
 }
+
+#errorMessages {
+    color: red;
+}
