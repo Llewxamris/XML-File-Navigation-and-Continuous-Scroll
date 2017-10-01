@@ -66,6 +66,7 @@
 
         // Add all users elements to a super user element.
         userElement.appendChild(idElement);
+        userElement.appendChild(nameElement);
         userElement.appendChild(cityElement);
         userElement.appendChild(countryElement);
         userElement.appendChild(emailElement);
@@ -79,7 +80,7 @@
 
     const getListOfUsers = (startingRecord) => {
         const phpAddress =
-            `http://localhost:9000/getUsers.php?sr=${startingRecord}`;
+            `http://localhost:9000/getUsers.php?sr=${startingRecord}&c=50`;
         try {
             const xhr = getXmlHttpRequest();
             xhr.open('GET', phpAddress);
@@ -87,9 +88,13 @@
             xhr.addEventListener('readystatechange', () => {
                 if(xhr.readyState === 4) {
                     const users = xhr.responseXML.querySelectorAll('user');
-                    users.forEach(user => {
-                        displayUserToScreen(user);
-                    });
+                    const main = document.querySelector('#main');
+                    if (users.length !== 0) {
+                        main.innerHTML = '';
+                        users.forEach(user => {
+                            displayUserToScreen(user);
+                        });
+                    }
                 }
             });// xhr.addEventListener(...)
         } catch(error) {
@@ -97,6 +102,28 @@
             in a moment. \n${error}`);
         }
     };// getListOfUsers(...)
+
+    document.addEventListener('scroll', () => {
+        const mainElement = document.querySelector('#main');
+        // Catch if user has scrolled to the top of the page.
+        if (window.scrollY === 0) {
+            const startingId = parseInt(
+                mainElement.querySelectorAll('.userId')[0].innerText) - 25;
+
+            if (startingId >= 1) {
+                getListOfUsers(startingId);
+            }
+        }
+
+        // Catch if user has scrolled to the bottom of the page.
+        if ((window.innerHeight + window.scrollY) >=
+            document.body.offsetHeight) {
+            const userIdElems = mainElement.querySelectorAll('.userId');
+            const endingId = parseInt(
+                userIdElems[userIdElems.length - 1].innerText) + 1;
+            getListOfUsers(endingId);
+        }
+    });// document.addEventListener('scroll', ...)
 
     getListOfUsers(1);
 })();
