@@ -1,0 +1,73 @@
+body {
+    font-family: sans-serif;
+    line-height: 1.4;
+    color: #444;
+    background-color: #EEE;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.userId {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #EEE;
+}
+
+.userName:before {
+    content: "Name:\00a0";
+}
+
+.userName {
+    font-weight: bolder;
+    font-size: 1.5em;
+}
+
+.userCity:before {
+    content: "City:\00a0";
+    font-weight: bold;
+}
+
+.userCountry:before {
+    content: "Country:\00a0";
+    font-weight: bold;
+}
+
+.userEmail:before {
+    content: "Email:\00a0 ";
+    font-weight: bold;
+}
+
+.userGender:before {
+    content: "Gender:\00a0 ";
+    font-weight: bold;
+}
+
+.userPet:before {
+    content: "Pet:\00a0 ";
+    font-weight: bold;
+}
+
+.userPetColour:before {
+    content: "Pet Colour:\00a0";
+    font-weight: bold;
+}
+
+ @media screen and (min-width: 1200px) {
+  #main {
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+        grid-template-rows: 33% 33% 33%;
+        grid-gap: 40px 10px;
+        justify-content: center;
+    }
+}
+
