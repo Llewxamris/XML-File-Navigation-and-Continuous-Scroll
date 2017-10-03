@@ -108,9 +108,10 @@
         // Catch if user has scrolled to the top of the page.
         if (window.scrollY === 0) {
             const startingId = parseInt(
-                mainElement.querySelectorAll('.userId')[0].innerText) - 25;
+                mainElement.querySelectorAll('.userId')[0].innerText) - 50;
 
             if (startingId >= 1) {
+                window.scrollTo(0, document.body.scrollHeight - 900);
                 getListOfUsers(startingId);
             }
         }
@@ -118,6 +119,8 @@
         // Catch if user has scrolled to the bottom of the page.
         if ((window.innerHeight + window.scrollY) >=
             document.body.offsetHeight) {
+            // document.body.scrollTop = document.documentElement.scrollTop = 3;
+            window.scrollTo(0, 3);
             const userIdElems = mainElement.querySelectorAll('.userId');
             const endingId = parseInt(
                 userIdElems[userIdElems.length - 1].innerText) + 1;
