@@ -36,7 +36,7 @@
 
         // Set the text of the elements to the value of their counterparts
         // inside the user XML element.
-        idElement.innerText = user.querySelector('id').firstChild.nodeValue;
+        userElement.id = user.querySelector('id').firstChild.nodeValue;
         firstNameElement.innerText =
             user.querySelector('firstName').firstChild.nodeValue;
         lastNameElement.innerText =
@@ -80,7 +80,7 @@
 
     const getListOfUsers = (startingRecord) => {
         const phpAddress =
-            `http://localhost:9000/getUsers.php?sr=${startingRecord}&c=50`;
+            `./getUsers.php?sr=${startingRecord}&c=50`;
         try {
             const xhr = getXmlHttpRequest();
             xhr.open('GET', phpAddress);
@@ -103,15 +103,27 @@
         }
     };// getListOfUsers(...)
 
-    document.addEventListener('scroll', () => {
+    const throttleFn = (fn, delay) => {
+        let timer = null;
+
+        return () => {
+            const context = this;
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                fn.apply(context);
+            }, delay);
+        };
+    };
+
+    document.addEventListener('scroll', throttleFn(() => {
         const mainElement = document.querySelector('#main');
         // Catch if user has scrolled to the top of the page.
-        if (window.scrollY === 0) {
+        if (window.scrollY == 0) {
             const startingId = parseInt(
-                mainElement.querySelectorAll('.userId')[0].innerText) - 50;
+                mainElement.querySelectorAll('.user')[0].id) - 50;
 
             if (startingId >= 1) {
-                window.scrollTo(0, document.body.scrollHeight - 900);
+                window.scrollTo(0, document.body.scrollHeight - 1000);
                 getListOfUsers(startingId);
             }
         }
@@ -119,14 +131,13 @@
         // Catch if user has scrolled to the bottom of the page.
         if ((window.innerHeight + window.scrollY) >=
             document.body.offsetHeight) {
-            // document.body.scrollTop = document.documentElement.scrollTop = 3;
-            window.scrollTo(0, 3);
-            const userIdElems = mainElement.querySelectorAll('.userId');
+            window.scrollTo(0, 5);
+            const userIdElems = mainElement.querySelectorAll('.user');
             const endingId = parseInt(
-                userIdElems[userIdElems.length - 1].innerText) + 1;
+                userIdElems[userIdElems.length - 1].id) + 1;
             getListOfUsers(endingId);
         }
-    });// document.addEventListener('scroll', ...)
+    }, 50));// document.addEventListener('scroll', ...)
 
     getListOfUsers(1);
 })();
