@@ -2,7 +2,6 @@ body {
     font-family: sans-serif;
     line-height: 1.4;
     color: #444;
-    background-color: #EEE;
 }
 
 #main {
@@ -14,6 +13,16 @@ body {
 .user {
     padding-bottom: 20px;
     text-align: center;
+    background-color: #EEE;
+    box-shadow: 0px 0px 0px #FFF;
+    transition: box-shadow 0.2s ease-out;
+    /* animation-name: fadeIn;
+    animation-duration: 0.5s; */
+}
+
+.user:hover {
+    box-shadow: 0px 0px 25px #999;
+    transition: box-shadow 0.2s;
 }
 
 .userId {
@@ -61,6 +70,19 @@ body {
     font-weight: bold;
 }
 
+/*@keyframes fadeIn {
+ * Animation commented out because it was unknown at the time in an
+ * animation like this was correct for this assignment.
+    from {
+        background-color: #FFF;
+        color: #FFF;
+    }
+    to {
+        background-color: #EEE:
+        color: #444;
+    }
+}*/
+
  @media screen and (min-width: 1200px) {
   #main {
         display: grid;
@@ -70,4 +92,3 @@ body {
         justify-content: center;
     }
 }
-
