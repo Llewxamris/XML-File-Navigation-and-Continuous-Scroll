@@ -14,7 +14,7 @@ list of users from `users.xml`. It should load in more users as the user
 scrolls to the bottom of the page.
 
 ## Tools Used
-All files written in Vim.
+All files written in Vim. Tested in Firefox and Chromium, running on Ubuntu.
 
 ## License
 This software under the GNU GENERAL PUBLIC LICENSE 3.0. Please see the LICENSE
